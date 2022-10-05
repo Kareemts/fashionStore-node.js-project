@@ -1,0 +1,37 @@
+<section>
+  <div class="container">
+    <div class="row" style="width: 200px;  margin-left: 75%;  ">
+      {{!-- <a href="/admin/add-banner" class="btn btn-success"> BANNER</a> --}}
+    </div>
+    <H3>BANNER</H3>
+    <table class="table" style="background-color: rgba(145, 140, 140, 0.27);" id="dataTabile">
+      <thead >
+        <tr>
+          <th scope="col">NO</th>
+          <th scope="col">BNNER NAME</th>
+          <th scope="col">DISCRIPTION</th>
+          <th scope="col">CAPTION</th>
+          <th scope="col">BANNER IMAGE</th>
+          <th scope="col"></th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each banner}}
+        <tr style="background-color: #FFF9F9;">
+          <th>{{inc @index}}</th>
+          <td>{{this.NAME}}</td>
+          <td>{{this.DISCRIPTION}}</td>
+          <td>{{this.caption}}</td>
+          <td><img style="width: 400px;" height="200px" src="/banner-Images/{{this.Images.[0]}}" alt=""></td>
+          <td><a href="/admin/change-banner/{{this._id}}" class="btn btn-primary">Change Banner</a></td>
+
+        </tr>
+        {{/each}}
+
+
+      </tbody>
+    </table>
+  </div>
+</section>

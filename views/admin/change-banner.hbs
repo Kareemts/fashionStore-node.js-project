@@ -1,0 +1,26 @@
+<section class="d-flex">
+  <div class="container mt-4">
+
+    <div class="col-md-6">
+      <div class="text-center">Change Banner</div>
+
+
+      <form action="/admin//change-banner/{{banner._id}}" method="post" enctype="multipart/form-data" required>
+        <label for="">Name</label>
+        <input type="text" name="NAME" class="form-control" value="{{banner.NAME}}">
+
+        <label class="mt-3" for="">Discription</label>
+        <input type="text" name="DISCRIPTION" class="form-control" value="{{banner.DISCRIPTION}}" required>
+
+        <label class="mt-3" for="">Caption</label>
+        <input type="text" name="caption" class="form-control" value="{{banner.caption}}" required>
+
+
+        <label class="mt-3" for="">Banner Image</label>
+        <img src="/banner-images/{{banner.Images.[0]}}" width="400px" height="200px" alt="">
+        <input type="file" name="Images" class="form-control" required>
+
+        <button type="submit" class="btn btn-success mt-4">Change</button>
+      </form>
+    </div>
+</section>

@@ -1,0 +1,92 @@
+{{!-- <section>
+    <div class="col-md-4 m-auto">
+        <div class="container mt-5 pl-5">
+
+            <h1 class="text-center fs-3">Signup</h1>
+
+            <form action="/signup" method="post">
+                <div class=" form-group">
+                    <label for="">Enter Name</label>
+                    <input type="text" name="Name" id="Name" onkeyup="validateName()" class="form-control"
+                        placeholder="Enter Name"  >
+                </div>
+                <span id="NameError" class="text-danger my-auto"></span>
+
+                <div class="form-group mt-2">
+
+                    <label for="">Moble Number</label>
+                    <input type="tel" name="MobileNumber" id="MobileNumber" onkeyup="validateNumber()"
+                        class="form-control" placeholder="Moble Number" required >
+                    <span id="phoneNumber-error" class="text-danger my-auto"></span>
+                </div>
+
+
+                <div class="form-group mt-2">
+                    <label for="">Email Address</label>
+                    <input type="email" name="Email" id="Email" onkeyup="validateEmail()" class="form-control"
+                        placeholder="Email Address" required>
+                    <span id="email-error" class="text-danger my-auto"></span>
+                </div>
+
+
+                <div class="form-group mt-2">
+                    <label for="">Password</label>
+                    <input type="password" name="Password" id="Password" onkeyup="validatePassword()"
+                        class="form-control" placeholder="Password" required >
+                    <span id="password-error" class="text-danger my-auto"></span>
+
+                </div>
+
+
+                <div class="form-group mt-2">
+                    <label for="">Confirm Password</label>
+                    <input type="password" name="" id="ConfirmPassword" onkeyup="validateConfirmPassword()"
+                        class="form-control" placeholder="Confirm Password" required >
+                    <span id="confirmPassword-error" class="text-danger my-auto"></span>
+
+                </div>
+
+                
+
+                <br>
+                <br>
+                <div class="form-group mt-3">
+                    <label class="d-flex justify-content-center text-dark"  for=""></label>
+                    {{#if refferalError}}
+                    <p class="error d-flex justify-content-center" style="color: red;">Invalid refferal code</p>
+                    {{/if}}
+                    <input type="text" name="refferalCode" id="rufferalCode" class="form-control"
+                        style="font-size: 10px;" placeholder="                               Enter refferal code">
+
+
+                </div>
+
+
+                <button type="submit" class="btn btn-dark   mt-3 " onclick="return validateForm()">
+                    Signup
+
+                </button>
+                <br>
+
+                <div class="mt-3" style="margin-left: 150px;"><a href="/login">Already Have An Account ?</a></div>
+
+
+                <span id="submitError" class="text-danger my-auto"></span>
+
+
+
+            </form>
+
+
+        
+
+
+        </div>
+    </div>
+</section>
+
+<script>
+ function kareem(){
+        alert('aaaaaaaaaaaaaaaaa')
+    }
+</script> --}}

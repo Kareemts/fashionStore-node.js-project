@@ -1,0 +1,74 @@
+<section>
+    <div class="row">
+        <div class="col-md-3 m-auto">
+            <div class="container mt-5 pl-5">
+
+                <div class="text-center fs-3">Enter OTP</div>
+
+
+                <form action="/otpLogin" method="post">
+                    {{#if loginErr3}}
+                    <p class="error  " style="color: red;">Invalid OTP , Plese Re-Enter</p>
+                    {{/if}}
+
+
+                    {{!-- <p class="ml-4"> Resend OTP in <span id="countdowntimer">60 </span> Seconds</p> --}}
+                    <div class="form-group">
+
+                        <label for=""></label>
+                        <input type="text" name="otp" class="form-control mt-3">
+                    </div>
+                    <span id="resend" class="text-dark"></span>
+                    <div id="timer-full">Resend Otp <span id="timer"></span></div>
+
+
+
+                    <button type="submit" class="btn btn-Primary   mt-2" style="margin-left: 80px;">
+                        submit
+
+                    </button>
+                    <div class="pt-5">
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+</section>
+
+
+<script>
+    let timerOn = true;
+
+    function timer(remaining) {
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+
+        m = m < 10 ? '0' + m : m;
+        s = s < 10 ? '0' + s : s;
+        document.getElementById('timer').innerHTML = m + ':' + s;
+        remaining -= 1;
+
+        if (remaining >= 0 && timerOn) {
+            setTimeout(function () {
+                timer(remaining);
+            }, 1000);
+            return;
+        }
+
+        if (!timerOn) {
+            // Do validate stuff here
+            return;
+        }
+
+        // Do timeout stuff here
+        document.getElementById('resend').innerHTML = '<a href="/resend-otp">Resent Otp</a>'
+        document.getElementById('timer-full').innerHTML = ''
+    }
+
+    timer(60);
+</script>

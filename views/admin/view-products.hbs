@@ -1,0 +1,52 @@
+<section>
+  <div class="container-fluid" style="margin-top: -45px">
+    <div class="d-flex justify-content-end">
+      <div style="width: 200px; ">
+        <a href="/admin/add-product" class="btn btn-secondary">Add Products</a>
+      </div>
+    </div>
+    <h3>ALL PORODUCTS</h3>
+    <div style="overflow-x:auto;">
+      <table class="table mt-4" id="dataTabile">
+        <thead>
+          <tr>
+            <th scope="col">NO</th>
+            <th scope="col">NAME</th>
+            <th scope="col">BRAND</th>
+            <th scope="col">STOCK</th>
+            <th scope="col">MRP</th>
+            <th scope="col">S Price</th>
+            <th scope="col">CATEGORIES</th>
+            <th scope="col">SUBCATEGORIES</th>
+            <th scope="col">IMAGE</th>
+            <th scope="col">EDIT</th>
+            <th scope="col">DELETE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+          <tr >
+            <th>{{inc @index}}</th>
+            <td>{{this.NAME}}</td>
+            <td>{{this.brand}}</td>
+            <td>{{this.Stock}}</td>
+            <td>₹{{this.MRP}}.00</td>
+            <td>₹{{this.OfferPrice}}</td>
+            <td>{{this.categoryName}}</td>
+            <td>{{this.subCategoryName}}</td>
+            <td><img style="width: 100px;" height="100px" src="/product-images/{{this.Images.[0]}}" alt=""></td>
+            <td><a href="/admin/edit-product/{{this._id}}"><i class="fi fi-rs-pencil text-dark  mr-2"></i></a>
+              <a href="/admin/Add-stock/{{this._id}}" ><i class="fi fi-rs-apps-add text-dark"></i></a>
+            </td>
+            <td><a href="/admin/delete-product/{{this._id}}"
+                onclick="return confirm('Are you Want to Delete {{this.NAME}} ?')"><i class="fi fi-rr-trash text-danger"></i></a>
+            </td>
+
+          </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

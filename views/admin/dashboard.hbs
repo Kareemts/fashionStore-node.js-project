@@ -1,0 +1,123 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<section>
+    <div class="row pl-3 pr-3 ">
+        <div class="col-sm-3 pb-2">
+            <div class="shadow-sm   rounded">
+                <div class="card-body ">
+                    <h5 class="card-title d-flex justify-content-start text-dark font-weight-bold">TOTAL USERS</h5>
+                    <hr>
+                    <h5 class="card-title d-flex justify-content-end  font-weight-bold">NO: {{totalUSers}}</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 pb-2">
+            <div class="shadow-sm   rounded">
+                <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-start text-dark font-weight-bold">TOTAL PRODUCTS</h5>
+                         <hr>
+                    <h5 class="card-title d-flex justify-content-end font-weight-bold">NO: {{totalProducts}}</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 pb-2">
+            <div class="shadow-sm   rounded">
+                <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-start text-dark font-weight-bold">THIS MONTH</h5>
+                         <hr>
+                    <h5 class="card-title d-flex justify-content-end  font-weight-bold">₹: {{monthlyEarning.[0].total}}</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 pb-2">
+            <div class="shadow-sm   rounded">
+                <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-start text-dark font-weight-bold">THIS YEAR</h5>
+                         <hr>
+                    <h5 class="card-title d-flex justify-content-end font-weight-bold">₹: {{yearlyEarning.[0].total}}</h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6 pl-5">
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+            </div>
+
+            <div class="col-md-6">
+                <canvas id="DoughnutCharts" style="width:100%;max-width:600px"></canvas>
+            </div>
+
+
+        </div>
+
+</section>
+
+<script>
+    var xValues = ['JAN', 'FEB', 'MAR', 'APR', 'MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    var yValues = [{{chart}}];
+
+    new Chart("myChart", {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValues
+            }]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "SALES REPORT"
+            }
+        }
+    });
+</script>
+
+
+<script>
+
+    var xValues = ["COD", "RAZERPAY", "PAYPAL","Wallet"];
+    var yValues = [{{ cod.[0].count }}, {{ razorpay.[0].count }}, {{ paypal.[0].count }},{{ Wallet.[0].count }}];
+    var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
+
+    new Chart("DoughnutCharts", {
+        type: "doughnut",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "PAYMENT REPORT"
+            }
+        }
+    });
+</script>

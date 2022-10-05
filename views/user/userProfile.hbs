@@ -1,0 +1,154 @@
+
+
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3">{{userData.Name}}</h5>
+                            {{!-- <p class="text-muted mb-1">Full Stack Developer</p> --}}
+                            {{!-- <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> --}}
+                            <div class="d-flex justify-content-center mb-2">
+                                {{!-- <button type="button" class="btn btn-primary">Follow</button>
+                                <button type="button" class="btn btn-outline-primary ms-1">Message</button> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 mb-lg-0 ">
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush rounded-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fi fi-rr-apps-sort"></i>
+                                    <a class="text-secondary"
+                                        style="text-decoration: none;" href="/orders">My Orders</a>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fi fi-rs-shopping-cart "></i>
+                                    <a class="text-secondary"
+                                        style="text-decoration: none;" href="/view-cart">My Cart</a>
+
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fi fi-rr-heart mt-1 mr-2"></i>
+                                    <a class="text-secondary"
+                                        style="text-decoration: none;" href="/Wishlist">My Wishlist</a>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fi fi-rs-time-past"></i>
+                                    <a class="text-secondary"
+                                        style="text-decoration: none;"  href="/wallet-history">Wallet History</a>
+                                    
+                                    
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 mb-4">
+                                    <i class="fi fi-ss-sign-out-alt mt-1 mr-2" ></i>
+                                    <a class="text-secondary"
+                                        style="text-decoration: none;" href="/logout">Logout</a>
+                                   
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Full Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.Name}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.Email}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Phone</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.MobileNumber}}</p>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <hr>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4  d-flex justify-content-center font-weight-bold text-dark"> Manage Your
+                                        Data
+                                    </p>
+                                    <hr>
+
+                                    <a class="d-flex justify-content-center font-weight-bold text-secondary"
+                                        style="text-decoration: none;" href="/change-personal-information">Change
+                                        Personal-info</a>
+                                    <br>
+
+                                    <hr>
+                                    <a class="d-flex justify-content-center font-weight-bold text-secondary"
+                                        style="text-decoration: none;" href="/changePassword">Change Password</a>
+
+                                    <hr>
+
+                                    <a class="d-flex justify-content-center font-weight-bold text-secondary"
+                                        style="text-decoration: none;" href="/mange-address"> Manage Address </a>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4 d-flex justify-content-center font-weight-bold text-dark"> Your
+                                        wallet
+                                    </p>
+                                  
+                                    <div class="d-flex justify-content-around pt-1 pb-1">
+                                        <h5>Balance - Rs:{{walletBalance}} </h5>
+                                    </div>
+                                      <hr>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        
+                                    </div>
+
+                                    <div class="container bg-light rounded-lg border border-dark mb-3 ">
+
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <h5 class=" text-dark">YOUR REFERRAL CODE</h5>
+                                                <div class="d-flex justify-content-center mb-3">
+                                                    {{userData.yourRefferalCode}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center  mb-2 text-dark">
+                                        <p>Refer your friends and earn Rs:2000.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+

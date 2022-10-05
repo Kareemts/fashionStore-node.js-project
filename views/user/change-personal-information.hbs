@@ -1,0 +1,44 @@
+<section>
+    <div class="row">
+        <div class="col-md-4 m-auto">
+            <div class="container mt-5 pl-5">
+
+                <div class="text-center font-weight-bold fs-5 ">Change personal information</div>
+
+
+                <form action="/change-personal-information" method="post">
+
+                    <div class="form-group mt-4">
+
+                        <label class="fs-6" for="">Change Name</label>
+                        <input type="Name" name="Name" class="form-control" value="{{userData.Name}}">
+                    </div>
+
+                    <div class="form-group pt-5">
+                        <label class="fs-6" for="">Change Moble Number</label>
+                        <input type="Number" name="MobileNumber" id="Passworduser" class="form-control"
+                            onkeyup="validatePassworduser()" value="{{userData.MobileNumber}}">
+
+                    </div>
+                    <span id=" password-error-user" class="text-danger my-auto"></span>
+                    <div class=" form-group pt-4">
+                        <label class="fs-6 mt-3" for="">Change Email Address</label>
+                        <input type="Email" name="Email" class="form-control" id="ConfirmPassworduser"
+                            onkeyup="validateConfirmPassworduser()" value="{{userData.Email}}">
+
+                    </div>
+                    <span id=" confirmPassword-error-user" class="text-danger my-auto"></span>
+
+                    <button type="submit" class="btn btn-dark   mt-3">
+                        Change
+
+                    </button>
+                    <br>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+</section>

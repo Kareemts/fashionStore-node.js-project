@@ -1,0 +1,229 @@
+<section class="bg-image d-felx">
+  <div class="mask d-flex align-items-center  ">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h4 class="text-uppercase text-center mb-3">Create an account</h4>
+
+              <form action="/signup" method="post">
+                <span id="labelname" class="text-danger my-auto"></span>
+                <div class="form-outline mb-2">
+                  <input type="text" name="Name" id="firstName" class="form-control form-control-md "
+                    onfocusout="validateFirstName()" required />
+                  <label class="form-label" for="form3Example1cg">Your Name</label>
+                </div>
+
+                <span id="labelMobile" class="text-danger my-auto"></span>
+                <div class="form-outline mb-2">
+                  <input type="tel" name="MobileNumber" id="mobileNumber" class="form-control form-control-md"
+                    onfocusout="validateNumber()" required />
+                  <label class="form-label" for="form3Example3cg">Mobile Number</label>
+                </div>
+
+                <span id="email-error" class="text-danger my-auto"></span>
+                <div class="form-outline mb-2">
+                  <input type="email" name="Email" id="Email" class="form-control form-control-md" required />
+                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                </div>
+
+                <span id="" class="text-danger my-auto"></span>
+                <div class="form-outline mb-2">
+                  <input type="password" name="Password" id="password" class="form-control form-control-md"
+                    onkeyup="validatePassword()" required />
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                </div>
+
+                <span id="labelPassword" class="text-danger my-auto"></span>
+                <div class="form-outline mb-2">
+                  <input type="password" name="" id="confirmPassword" class="form-control form-control-md"
+                    onfocusout="validatePassword()" required />
+                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                </div>
+
+
+                <div class="form-outline mb-2">
+                  <input type="text" name="refferalCode" id="rufferalCode" class="form-control form-control-sm" />
+                  <label class="form-label " for="form3Example4cdg">Enter referral code here</label>
+                </div>
+                {{#if refferalError}}
+                <p class="error d-flex justify-content-center" style="color: red;">Invalid referral code </p>
+                {{/if}}
+
+
+
+                <span id="labelSubmission" class="text-danger my-auto"></span>
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-dark btn-block btn-lg  text-white"
+                    onclick="return validateSubmission()">Register</button>
+                </div>
+
+
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
+                    class="fw-bold "><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+  }
+
+  .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+  }
+</style>
+
+
+
+
+
+
+<script>
+
+  let fn = false
+  let mn = false
+  let pass = false
+  function validateFirstName() {
+
+    var text = document.getElementById("firstName").value;
+    var regx = /^[a-zA-Z ]+$/;
+    if (regx.test(text)) {
+      valid('labelname')
+      fn = true
+    }
+    else {
+      invalid('labelname')
+      fn = false
+    }
+  }
+
+  function validateNumber() {
+
+    var text = document.getElementById("mobileNumber").value;
+    var regx = /^([0-9]{10})+$/;
+    if (regx.test(text)) {
+      valid('labelMobile')
+      mn = true;
+      return true
+    }
+    else {
+      invalid('labelMobile')
+      mn = false;
+    }
+
+  }
+
+  function validatePassword() {
+    var password1 = document.getElementById("password").value;
+    var regx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    if (regx.test(password1)) {
+
+      var password2 = document.getElementById("confirmPassword").value;
+
+      if (password1 === password2 && password1 != "") {
+        document.getElementById("labelPassword").innerHTML = "<strong><i class='pe-7s-like2'> <i/></strong>";
+        document.getElementById("labelPassword").style.visibility = "visible";
+        document.getElementById("labelPassword").style.color = "green";
+        pass = true
+
+
+
+      }
+      else {
+        document.getElementById("labelPassword").innerHTML = "password mismatch";
+        document.getElementById("labelPassword").style.visibility = "visible";
+        document.getElementById("labelPassword").style.color = "red";
+        pass = false
+
+      }
+    }
+    else {
+      let errors = [];
+      if (password1.length < 6) {
+        errors.push("Your password must be at least 6 characters");
+      } else errors.push("")
+      if (password1.search(/[a-z]/i) < 0) {
+        errors.push("Your password must contain at least one letter.");
+      } else errors.push("")
+      if (password1.search(/[0-9]/) < 0) {
+        errors.push("Your password must contain at least one digit.");
+      } else errors.push("")
+      if (password1.search(/[!,@,#,$,%,^,&,*,]/) < 0) {
+        errors.push("Your password should contain atleast one special character.");
+      } else errors.push("")
+
+      console.log(errors);
+
+      document.getElementById("labelPassword").innerHTML = errors[0] + "<br>" + errors[1] + "<br>" + errors[2] + "<br>" + errors[3]
+      document.getElementById("labelPassword").style.visibility = "visible";
+      document.getElementById("labelPassword").style.color = "red";
+
+
+
+
+    }
+  }
+
+  function validateSubmission() {
+    validatePassword()
+    validateNumber()
+    validateFirstName()
+    if (fn == true && mn == true && pass == true) {
+      return true;
+      fn = false
+      mn = false
+      pass = false
+     
+
+    } else {
+      invalid('labelSubmission');
+      return false;
+    }
+
+  }
+
+
+
+  function valid(labelname) {
+    console.log(labelname)
+    document.getElementById(labelname).innerHTML = "<strong><i class='pe-7s-like2'> <i/></strong>";
+    document.getElementById(labelname).style.visibility = "visible";
+    setTimeout(() => {
+      document.getElementById(labelname).style.visibility = "none";
+    }, 5000);
+    document.getElementById(labelname).style.color = "green";
+
+  }
+  function invalid(labelname) {
+    document.getElementById(labelname).innerHTML = "<i class='pe-7s-close-circle'> check your entries<i/>";
+    document.getElementById(labelname).style.visibility = "visible";
+    document.getElementById(labelname).style.color = "red";
+  }
+
+
+</script>

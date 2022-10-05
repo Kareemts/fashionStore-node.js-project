@@ -1,0 +1,215 @@
+
+
+<section>
+    <div class="container mt-5">
+        <form id="chekout-form">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h2>Enter Delivery Details</h2>
+                    <div>
+                        <div class=" form-group">
+                            <label for="">Enter Address</label>
+                            <input type="text" name="Address" id="Address" onkeyup="validateAddress()"
+                                class="form-control" placeholder="Enter Address" required>
+                            <span id="addressErr" class="text-danger my-auto"></span>
+                        </div>
+
+                        <div class=" form-group">
+                            <label for="">Enter Pincode</label>
+                            <input type="text" name="Pincode" id="Pincode" onkeyup="validatePincode()"
+                                class="form-control" placeholder="Enter Address" required>
+                            <span id="pincodeErr" class="text-danger my-auto"></span>
+                        </div>
+                        <div class=" form-group">
+                            <label for="">Enter Mobile Number</label>
+                            <input type="text" name="Number" id="Number" onkeyup="validatenumber()" class="form-control"
+                                placeholder="Enter Address" required>
+                            <span id="NumberErr" class="text-danger my-auto"></span>
+                            <span id="submitError" class="text-danger my-auto"></span>
+                        </div>
+
+
+                        <input type="text" name="userId" value="{{user._id}}" class="form-control" hidden>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="container mt-5 ml-5 checkout">
+                        <h5>Total Amount :₹{{sumOfCartProducts}}.00</h5>
+                        <hr>
+                        <div class="payment">
+                            <p>payment method</p>
+                            <label class="radio-inline" for=""><input type="radio" name="payment-method" value="COD"
+                                    checked>COD</label>
+                            <label class="radio-inline mt-2"> <input type="radio" name="payment-method" value="Razorpay"
+                                    checked>Razorpay</label>
+                            <label class="radio-inline mt-2"> <input type="radio" name="payment-method" value="Paypal"
+                                    checked>Paypal</label>
+                            <label class="radio-inline mt-2"> <input type="radio" name="payment-method" value="Wallet"
+                                    checked>Wallet</label>
+                            <p class="text-dark">Wallet balance :₹{{wallet.balance}}.00</p>
+                            <button onclick="checkout()" class="btn btn-primary float-right "
+                                type="submit">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</section>
+
+
+<script>
+    var AddressError = document.getElementById('addressErr');
+
+    function validateAddress() {
+
+        var Address = document.getElementById('Address').value;
+
+        if (Address.length < 3) {
+            addressErr.innerHTML = "Enter Propper Address";
+            return false;
+        }
+        addressErr.innerHTML = ""
+        return true
+    }
+
+    function validatePincode() {
+
+        var Pincode = document.getElementById('Pincode').value;
+
+        if (Pincode.length < 3) {
+            pincodeErr.innerHTML = "Enter Propper Pincode";
+            return false;
+        }
+        pincodeErr.innerHTML = ""
+        return true
+    }
+
+    function validatenumber() {
+
+        var Number = document.getElementById('Number').value;
+
+        if (Number.length < 10) {
+            NumberErr.innerHTML = "Enter Propper Mobile Number";
+            return false;
+        }
+        NumberErr.innerHTML = ""
+        return true
+    }
+
+    function checkout() {
+
+        if (!validateAddress() || !validatePincode() || !validatenumber()) {
+            submitError.innerHTML = 'Please fill the form properly';
+            return false;
+        }
+    }
+{{!-- 
+    $("#chekout-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/place-order',
+            method: 'post',
+            data: $('#chekout-form').serialize(),
+            success: (response) => {
+                if (response.COD) {
+                    location.href = '/order-success'
+                }
+                if (response.RAZORPAY) {
+                    razorpayPayment(response)
+                }
+                if (response.PAYPAL) {
+                    paypalPayment(response)
+                }
+                if (response.insufficientFund) {
+                    swal("Sorry!", "InsufficientFund please use anather payment options", "warning");
+                }
+                if (response.wallet) {
+                    location.href = '/order-success'
+                }
+            }
+        })
+    })
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_WapRHiIHoxnvny",
+            "amount": order.amount,
+            "currency": "INR",
+            "name": "Fashion Store",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id,
+            "handler": function (response) {
+                varifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        }
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function varifyPayment(payment, order) {
+        $.ajax({
+            url: '/verfy-payment',
+
+            data: {
+                payment: payment,
+                order: order
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    location.href = '/order-success'
+                } else {
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+
+    function paypalPayment(response) {
+        console.log(response)
+        for (let i = 0; i < response.links.length; i++) {
+            if (response.links[i].rel === 'approval_url') {
+                console.log(response.links[i].href)
+                location.href = response.links[i].href
+            }
+        }
+    }
+</script> --}}
+
+<style>
+    input[type=radio] {
+        width: 20px;
+        height: 20px;
+    }
+
+    label.radio-inline {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .checkout {
+        border: 1px solid;
+        border-radius: 3px;
+        padding: 30px;
+    }
+
+    .payment {
+        padding-bottom: 16px;
+    }
+</style>

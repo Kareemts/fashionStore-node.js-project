@@ -1,0 +1,163 @@
+<section>
+  <main>
+    <div class="basket">
+      <div class="basket-module">
+        {{#if cartCount}}
+        <div class="basket-labels">
+          <ul>
+            <li class="item item-heading">Item</li>
+            <li class="price">Price</li>
+            <li class="quantity">Quantity</li>
+            {{!-- <li class="subtotal">Subtotal</li> --}}
+          </ul>
+        </div>
+        {{else}}
+        <div class="d-flex justify-content-center">
+          <img src="\images\emptyCart.jpg" alt="">
+        </div>
+
+        {{/if}}
+      </div>
+      {{#each poroduct}}
+      <div class="basket-product" id="id+'{{this._id}}'">
+        <div class="item">
+          <div class="product-image">
+            <img src="/product-images/{{this.productItem.Images.[0]}}" alt="Placholder Image 2" class="product-frame">
+          </div>
+          <div class="product-details">
+            <h1><strong><span class="item-quantity"></span>{{this.NAME}}</strong> </h1>
+            <p><strong>{{this.productItem.DISCRIPTION}}</strong></p>
+            <p>{{this.productItem.brand}}</p>
+          </div>
+        </div>
+        <div class="price">{{this.productItem.OfferPrice}}</div>
+        <div class="quantity">
+          <BUtton class="cart-item-count btn-dark mr-3"
+            onclick="changeQuantity('{{this._id}}','{{this.productItem._id}}','{{../user._id}}',-1)">-</BUtton>
+          <div id="{{this.productItem._id}}">{{this.quantity}}</div><BUtton style=" margin-top: -18.5%;"
+            class="cart-item-count btn-dark ml-3"
+            onclick="changeQuantity('{{this._id}}','{{this.productItem._id}}','{{../user._id}}',1)">+</BUtton>
+          {{!-- <input type="number" value="" min="1" class="quantity-field"> --}}
+        </div>
+        <div class="remove">
+          <button onclick="itemRemove('{{this._id}}','{{this.productItem._id}}')"> <i
+              class="fi fi-rs-trash"></i></button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <aside>
+      {{#if cartCount}}
+      <div class="summary mt-5">
+        <br>
+        <div class="summary-total-items"><span class="total-items"></span>Sum of items in your Cart</div>
+        <div class="d-flex justify-content-center fs-5 " id="total">₹{{sumOfCartProducts}}.00</div>
+        <label class="d-flex justify-content-center" for="">Above ₹10000 </label>
+        <div class="input-group mb-3">
+          <input id="coupen" type="text" class="form-control" placeholder="Coupon code"
+            aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button onclick="coupen()" class="btn btn-outline-secondary btn-dark text-white"
+              type="button">Apply</button>
+          </div>
+        </div>
+        <br>
+
+        <div class="summary-total">
+          <div class="Discount fs-6">Discount</div>
+          <div class="DiscountAmount d-flex justify-content-end fs-6 " id="Discount">₹0.00</div>
+          <div class="total-title fs-5">Total Rs</div>
+          <div class="total-value final-value fs-5 " id="AfterDiscount">{{sumOfCartProducts}}.00</div>
+        </div>
+        <div class="summary-checkout">
+          <a href="/placeOrder"> <button class="checkout-cta btn-dark">Place Order</button></a>
+        </div>
+
+        {{/if}}
+
+      </div>
+    </aside>
+  </main>
+</section>
+<script>
+
+
+  function coupen() {
+    let coupenCode = document.getElementById('coupen').value
+    let total = document.getElementById('total').innerText
+    console.log(total)
+    $.ajax({
+      url: '/coupen',
+      data: {
+        coupenCode: coupenCode,
+        total: total
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.noCoupen) {
+          console.log(response)
+          swal("Sorry!", "Please Enter a coupon code", "warning");
+        }
+        if (response.lessAmount) {
+          console.log(response.lessAmount)
+          swal("Sorry!", "Please purchase above Rs10000", "warning");
+        }
+
+        if (response.invalidCoupen) {
+          swal("Sorry!", "Invalid coupon code", "warning");
+        }
+        if (response.coupenExp) {
+          swal("Sorry!", "Coupon code expired", "warning");
+        }
+        if (response.coupenUsed) {
+          swal("Sorry!", "Coupon alredy used", "warning");
+        }
+        if (response.coupenDis)
+          swal("Congrats!", "You applied a coupon", "success");
+        document.getElementById('Discount').innerHTML = "₹" + response.coupenDis.DiscAmount;
+        document.getElementById('AfterDiscount').innerHTML = response.coupenDis.totalDiscount;
+      }
+    })
+
+  }
+
+  function changeQuantity(cartId, proId, userId, count) {
+    let quantity = parseInt(document.getElementById(proId).innerHTML);
+    count = parseInt(count);
+    console.log(quantity);
+    $.ajax({
+      url: '/change-Product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity,
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.outOfstock) {
+          swal('Sorry!', 'You add maximem stock', 'warning');
+        }
+        if (response.removeProduct) {
+           swal('Sorry!', 'Item deleted from cart', 'warning');
+          location.reload();
+        }
+        if (response.statuse) {
+          document.getElementById(proId).innerHTML = quantity + count;
+          document.getElementById('total').innerHTML = response.total;
+          document.getElementById('AfterDiscount').innerHTML = response.total;
+
+        }
+      },
+    });
+  }
+</script>
+
+{{!--
+<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</script> --}}

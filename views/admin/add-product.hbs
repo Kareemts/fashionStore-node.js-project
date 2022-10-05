@@ -1,0 +1,90 @@
+<section>
+  <div class="container ">
+
+    <div class="col-md-4 mx-auto">
+      <div class="text-center fs-1" style="ba">Add Product</div>
+
+
+      <form action="/admin/add-product" method="post" enctype="multipart/form-data">
+        <label for="">Name</label>
+        <input type="text" name="NAME" class="form-control">
+
+        <div class="mt-2  ">
+          <label for="">Discription</label>
+          <input type="text" name="DISCRIPTION" class="form-control">
+        </div>
+
+        <div class="row">
+
+          <div class="mt-2  ">
+
+            <select name="categoryName" class="summary-delivery-selection">
+              <option value="0" selected="selected">Select Category</option>
+              {{#each categories}}
+              <option value="{{this.categoryName}}">{{this.categoryName}}</option>
+              {{/each}}
+
+            </select>
+
+
+          </div>
+          <div class=" mt-2 ">
+
+            <select name="subCategoryName" class="summary-delivery-selection">
+              <option value="0" selected="selected">Select Subcategory</option>
+              {{#each subCategories}}
+              <option value="{{this.subCategoryName}}">{{this.subCategoryName}}</option>
+              {{/each}}
+
+            </select>
+
+          </div>
+          <div class="mt-2  ">
+
+            <select name="brand" class="summary-delivery-selection">
+              <option value="0" selected="selected">Select Band</option>
+              {{#each brand}}
+              <option value="{{this.brand}}">{{this.brand}}</option>
+              {{/each}}
+
+            </select>
+
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="mt-2  ">
+            <label for="">MRP Price</label>
+            <input type="number" name="MRP" class="form-control">
+
+
+          </div>
+          <div class="mt-2  ">
+            <label for="">Selling Price</label>
+            <input type="number" name="OfferPrice" class="form-control">
+
+
+          </div>
+
+          <div class="mt-2">
+
+            <label for="">Stock</label>
+            <input type="number" name="Stock" class="form-control">
+
+          </div>
+        </div>
+
+        <label class="mt-2" for="">Image</label>
+        <input type="file" name="Images" class="form-control" multiple>
+
+        <button type="submit" class="btn btn-success mt-3 ">Submit</button>
+      </form>
+    </div>
+
+
+ {{!-- <script defer src="https://cdn.crop.guide/loader/l.js?c=LFVHFR"></script> --}}
+
+  </div>
+
+
+</section>

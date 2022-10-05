@@ -1,0 +1,29 @@
+<section>
+    <div class="container mt-4 mx-auto">
+
+        <div class="col-md-6 mx-auto">
+            <div class="text-center fs-1" style="ba">Add New Coupen</div>
+
+
+            <form class="mt-4" action="/admin/add-coupen" method="post">
+                {{#if coupenExist}}
+                <p class="error d-flex justify-content-around" style="color: red;">Coupen code already exist please Re-enter another one</p>
+                {{/if}}
+                <label for="">Coupen code</label>
+                <input type="text" name="coupenName" class="form-control" required>
+                <label for="">Coupen discount %</label>
+                <input type="number" name="discount" class="form-control" required>
+                <label for="">Expairy date</label>
+                <input type="date" name="expairyDate" class="form-control" required>
+
+                <button type="submit" class="btn btn-success mt-4 ">Submit</button>
+            </form>
+        </div>
+
+
+
+
+    </div>
+
+
+</section>

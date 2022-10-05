@@ -1,0 +1,39 @@
+<section>
+    <div class="row">
+        <div class="col-md-3 m-auto">
+            <div class="container mt-5 pl-5">
+
+                <div class="text-center fs-6">Enter Your Mobile Number</div>
+
+
+                <form action="/mobile-otplogin" method="post">
+                    {{#if erromNumber}}
+                    <p class="error  " style="color: red;">Invalid Mobile Number, Plese Re-Enter</p>
+                    {{/if}}
+
+                    <div class="form-group">
+
+                        <label for=""></label>
+                        <input type="text" name="MobileNumber" class="form-control mt-3">
+                    </div>
+
+
+                    <div>
+                        <button type="submit" class="btn btn-dark   mt-3">
+                            submit
+
+                        </button>
+                    </div>
+                    <br>
+
+
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+</section>

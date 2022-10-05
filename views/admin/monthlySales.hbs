@@ -1,0 +1,47 @@
+<section>
+    <div class="container-fluid md-5">
+        <div class="d-flex justify-content-center mb-4">
+            <h6 class="text-dark font-weight-bold" >Monthly sales</h6>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table mt-4" id="dataTabile">
+                <thead style="background-color: rgba(145, 140, 140, 0.27);">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Mrp</th>
+                        <th scope="col">S price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each monthly}}
+                    <tr style="background-color: #FFF9F9;">
+                        <td>{{inc @index}}</td>
+                        <td>{{this.date}}</td>
+                        <td>{{this.qty}}</td>
+                        <td>{{this.mrp}}</td>
+                        <td>{{this.payable}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+      $(document).ready(function() {
+    $('#dataTabile').DataTable( {
+            stateSave: true,
+    "bDestroy": true,
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'pdfHtml5',
+                download: 'open'
+            }
+        ]
+    } );
+} );
+    </script>

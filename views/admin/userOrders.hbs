@@ -1,0 +1,91 @@
+<section>
+  <div class="container-fluid" style="margin-top: -45px">
+    <div class="row" style="width: 200px; padding-left: 50px; margin-left: 75%;  ">
+
+    </div>
+    <h3>ORDERS</h3>
+    <table class="table mt-4" id="dataTabile">
+      <thead>
+        <tr>
+          <th scope="col">NO</th>
+          <th scope="col">ORDER DATE</th>
+          <th scope="col">ADDRESS</th>
+          <th scope="col">MOBILE</th>
+          <th scope="col">AMOUNT</th>
+          <th scope="col">PAYMENT</th>
+          <th scope="col">STATUS</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <th>{{inc @index}}</th>
+          <td>{{this.date1}}</td>
+          <td>{{this.deliveryDetails.Address}}</td>
+          <td>{{this.deliveryDetails.Number}}</td>
+          <td>₹{{this.totalPrice}}.00</td>
+          <td>{{this.PaymentMethod}}</td>
+          <td>
+            <select onchange="stastus('{{this._id}}')" id="{{this._id}}" class="form-select form-select-sm"
+              aria-label=".form-select-sm example">
+              <option value="" selected>{{this.status}}</option>
+              {{#if_eq this.status "placed"}}
+              <option value="Order packed">Order packed</option>
+              {{/if_eq}}
+              {{#if_eq this.status "Order packed"}}
+              <option value="Order shipped">Order shipped</option>
+              {{/if_eq}}
+              {{#if_eq this.status "Order shipped"}}
+              <option value="Order deliverd">Order deliverd</option>
+              {{/if_eq}}
+
+            </select>
+          </td>
+          <td>{{this.subCategoryName}}</td>
+          <td><a href="/admin/view-order-products/{{this._id}}"><i class="fi fi-rr-eye"></i></a></td>
+
+
+          {{#if_eq this.status "Order deliverd"}}
+          <td><a><i class="fi fi-rr-ban"></i></a></td>
+          {{/if_eq}}
+          
+         
+          {{#if_Neq this.status "Order deliverd" }}
+          {{#if action}}
+          <td><a href="/admin/cancel-order/{{this._id}}"
+              onclick="return confirm('Are you Want to Delete {{this.NAME}} ?')"><i class="fi fi-rr-cross text-danger"></i></a></td>
+          {{else}}
+          <td><a><i class="fi fi-rr-ban"></i></a></td>
+          {{/if}}
+          {{/if_Neq}}
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+
+  function stastus(proId) {
+    var stastus = document.getElementById(proId).value
+    console.log(stastus)
+    $.ajax({
+      url: '/admin/status-change/' + proId,
+      data: {
+        stastus: stastus,
+      },
+      method: 'post',
+      success: (response) => {
+        if (response) {
+          location.reload();
+        }
+
+      }
+    })
+  }
+
+</script>

@@ -1,0 +1,24 @@
+<section>
+    <div class="container pt-5">
+        <div class="row">
+            {{#each address}}
+            <div class="card col-md-5 ml-1 mb-2 ">
+                <h5 class="text-dark">Saved Address</h5>
+                <hr>
+                <div class="">
+                    <p class="card-text " id="FirstName{{this._id}}">{{this.FirstName}}
+                        {{this.LastName}},        
+                       Mobile No:  {{this.Number}}
+                    </p>
+                    <p class="card-text" id="Email{{this._id}}">{{this.Email}}</p>
+                    <p class="card-text" id="Address{{this._id}}">
+                        {{this.Address}},{{this.City}},{{this.Pincode}}
+                    </p>
+                    <p class="card-text" id="City{{this._id}}"></p>
+                    <p class="card-text" id="Pincode{{this._id}}"></p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>

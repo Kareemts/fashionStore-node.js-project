@@ -1,0 +1,29 @@
+<section>
+  <div class="container" style="margin-top: -45px">
+    <div class="row" style="width: 200px;   margin-left: 75%;  ">
+      <a href="/admin/add-brand" class="btn btn-secondary">Add Brands</a>
+    </div>
+    <h3>ALL BRANDS</h3>
+    <table class="table mt-4" id="dataTabile">
+      <thead style="background-color: rgba(145, 140, 140, 0.27);">
+        <tr>
+          <th scope="col">NO</th>
+          <th scope="col">SUBCATEGORIES</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each brand}}
+        <tr style="background-color: #FFF9F9;">
+          <th>{{inc @index}}</th>
+          <td>{{this.brand}}</td>
+          <td><a href="/admin/delete-brand/{{this._id}}" class="btn btn-danger"
+              onclick="return confirm('Are you Want to Delete {{this.NAME}} ?')">Delete</a></td>
+
+        </tr>
+          {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>

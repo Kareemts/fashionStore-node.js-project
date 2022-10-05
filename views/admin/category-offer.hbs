@@ -1,0 +1,53 @@
+<section>
+    <div class="container mt-4 mx-auto">
+
+        <div class="col-md-6 mx-auto">
+            <div class="text-center fs-1 mb-5" style="ba">Add category offers</div>
+
+
+            <div class="row">
+                <div class="col-md-4 ">
+                    <select onchange="categoryId()" id="category" name="categoryName" value="" class="summary-delivery-selection mt-4">
+                        <option value="0" selected="selected">Select Category</option>
+                        {{#each categories}}
+                        <option  value="{{this._id}}">{{this.categoryName}}</option>
+                        {{/each}}
+
+                    </select>
+
+
+                </div>
+                <div class="col-md-6">
+                    <label for="">Category discount %</label>
+                    <input type="number" name="discount" class="form-control" required>
+                </div>
+
+            </div>
+
+
+            <button type="submit"  class="btn btn-success mt-4 ">Activate</button>
+
+        </div>
+
+
+
+
+    </div>
+
+
+</section>
+
+<script>
+    
+    function categoryId(id){
+        alert('aaaaaaaaa')
+        category = document.getElementById('category').value
+        console.log(category)
+    }
+    console.log(categoryId)
+    {{!-- function categoryOffer() {
+        alert('aaaaaaaaaaaaaaaaaaaaaaaaa')
+        category = document.getElementById('category').value
+        console.log(category)
+    } --}}
+</script>

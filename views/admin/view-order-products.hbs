@@ -1,0 +1,213 @@
+<section>
+  <div class="d-flex">
+    <div class="container-fluid py-5 h-100 w-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-10 col-xl-8">
+          <div class="" style="border-radius: 10px;">
+            <div class="d-flex justify-content-center px-4 py-5">
+              <h5 class="text-muted mb-0">Order invoice</h5>
+            </div>
+            <div class="d-flex justify-content-end">
+              <a href="/download-invoice">
+                <button class="btn btn-dark text-white fs-6">DOWNLOAD INVOICE</button>
+              </a>
+            </div>
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                {{!-- <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+                <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p> --}}
+              </div>
+              {{#each poroducts}}
+              <div class="card shadow-0 border mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <img src="/product-images/{{this.productItem.Images.[0]}}" class="img-fluid" alt="Product img">
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0">{{this.productItem.NAME}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">{{this.productItem.categoryName}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">{{this.productItem.brand}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Qty: {{this.quantity}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">₹{{this.productItem.OfferPrice}}.00</p>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              {{/each}}
+              {{#if_eq this.orderTrack "Order Canceld"}}
+              <div class="row d-flex justify-content-around">
+                <di class="col-md-10 ">
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-danger mt-1 mb-0 large ms-xl-5 font-weight-bold ">Order canceld</p>
+                  </div>
+              </div>
+              {{/if_eq}}
+
+              {{#if_eq this.orderTrack "placed"}}
+              <div class="row d-flex justify-content-around">
+                <di class="col-md-10 ">
+
+                  <p class="text-muted mb-2  d-flex justify-content-around">Track status</p>
+                  {{#each orders}}
+                  <p class="text-muted mb-4  d-flex justify-content-around">Expecting Delivery Date:
+                    {{this.deliveryDate}}
+                  </p>
+                  {{/each}}
+                  <div class="progress" style="height: 6px; border-radius: 16px;">
+                    <div class="progress-bar" role="progressbar"
+                      style="width: 20%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5 ">Order placed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product packed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product shipped</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product Delivered</p>
+                  </div>
+              </div>
+              {{/if_eq}}
+              {{#if_eq this.orderTrack "Order packed"}}
+              <div class="row d-flex justify-content-around">
+                <di class="col-md-10 ">
+
+                  <p class="text-muted mb-2  d-flex justify-content-around">Track status</p>
+                  {{#each orders}}
+                  <p class="text-muted mb-4  d-flex justify-content-around">Expecting Delivery Date:
+                    {{this.deliveryDate}}
+                  </p>
+                  {{/each}}
+
+
+                  <div class="progress" style="height: 6px; border-radius: 16px;">
+                    <div class="progress-bar" role="progressbar"
+                      style="width: 45%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5 ">Order placed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product packed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product shipped</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product Delivered</p>
+                  </div>
+              </div>
+              {{/if_eq}}
+              {{#if_eq this.orderTrack "Order shipped"}}
+              <div class="row d-flex justify-content-around">
+                <di class="col-md-10 ">
+
+                  <p class="text-muted mb-2  d-flex justify-content-around">Track status</p>
+                  {{#each orders}}
+                  <p class="text-muted mb-4  d-flex justify-content-around">Expecting Delivery Date:
+                    {{this.deliveryDate}}
+                  </p>
+                  {{/each}}
+
+
+                  <div class="progress" style="height: 6px; border-radius: 16px;">
+                    <div class="progress-bar" role="progressbar"
+                      style="width: 70%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5 ">Order placed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product packed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product shipped</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product Delivered</p>
+                  </div>
+              </div>
+              {{/if_eq}}
+              {{#if_eq this.orderTrack "Order deliverd"}}
+              <div class="row d-flex justify-content-around">
+                <di class="col-md-10 ">
+
+                  <p class="text-muted mb-2  d-flex justify-content-around">Track status</p>
+                  {{#each orders}}
+                  <p class="text-muted mb-4  d-flex justify-content-around">Expecting Delivery Date:
+                    {{this.deliveryDate}}
+                  </p>
+                  {{/each}}
+
+                  <div class="progress" style="height: 6px; border-radius: 16px;">
+                    <div class="progress-bar" role="progressbar"
+                      style="width: 100%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5 ">Order placed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product packed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product shipped</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product Delivered</p>
+                  </div>
+                  <div class="d-flex justify-content-end mb-1">
+                    <a href="/Return-Item/{{orders.[0]._id}}">Return Item</a>
+                  </div>
+              </div>
+              {{/if_eq}}
+              {{#if_eq this.orderTrack "Order returnd"}}
+              <div class="row d-flex justify-content-around">
+                <di class="col-md-10 ">
+
+                  <p class="text-muted mb-2  d-flex justify-content-around">Track status</p>
+                  <div class="progress" style="height: 6px; border-radius: 16px;">
+                    <div class="progress-bar" role="progressbar"
+                      style="width: 100%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="d-flex justify-content-around mb-1">
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5 ">Order placed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product packed</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product shipped</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product Delivered</p>
+                    <p class="text-muted mt-1 mb-0 small ms-xl-5">Product Return</p>
+                  </div>
+              </div>
+              {{/if_eq}}
+
+
+            </div>
+            <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+            {{#each orders}}
+            <div class="d-flex justify-content-between pt-2 ml-3">
+              <p class="fw-bold mb-0">Order Details</p>
+              <p class="text-muted  ml-3"><span class="fw-bold me-4">Total</span>₹{{this.beforeDiscount}}.00
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-between pt-2">
+              <p class="text-muted mb-0">Invoice Number : {{this._id}}</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> ₹{{this.discount}}.00</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0">Invoice Date : {{this.date1}}</p>
+              {{!-- <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p> --}}
+            </div>
+
+            <div class="d-flex justify-content-between mb-5">
+              <p class="text-muted mb-0">Payment method : {{this.PaymentMethod}} </p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+            </div>
+          </div>
+          <div class=" border-0 px-4 py-5" style=" border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+            <h5 class="d-flex align-items-center justify-content-end  text-uppercase mb-0 " style="color: #a8729a;">bill
+              amount
+              : <span style="color: #a8729a;" class="h2 mb-0 ms-2">₹{{this.totalPrice}}.00</span></h5>
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

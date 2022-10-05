@@ -1,0 +1,140 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark "  style="position:fixed;width:100%;z-index:100; ">
+    <a class="navbar-brand fs-3 text-white" href="/">StyleWorld</a><button class="navbar-toggler" type="button"
+      data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        <li class="nav-item"> <a class="nav-link active" aria-current="page" href="/">Home</a> </li>
+        <li class="nav-item "> <a class="nav-link text-white" href="#footer">Contact</a> </li>
+        <li class="nav-item dropdown "> <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-expanded="false"> Shop </a>
+          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item text-white" href="#">Men's Fashion</a></li>
+            <li><a class="dropdown-item  text-white" href="#">Women's Fashion</a></li>
+          </ul>
+        </li>
+      </ul>
+        <div class="dropdown mr-5 ">
+          <div class="text-white  dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{#if user}}
+            {{ user.Name}}
+
+            {{else}}
+            Account
+
+            {{/if}}
+          </div>
+          <ul class="dropdown-menu bg-dark">
+            <i class=""></i>
+
+            {{#if user}}
+            <a class="nav-link d-flex justify-content-center  text-white" href="/user-profile"><i
+                class="fi fi-rs-user mt-1 mr-1"></i>View Profile</a>
+            <a class="nav-link d-flex justify-content-center  text-white" href="/Wishlist"><i
+                class="fi fi-rr-heart mt-1 mr-2"></i>Wishlist</i><span class="badge badge-dark fs-6 ml-2 text-white "
+                id="">{{wishlistCount}}</span></a></a>
+            <a class="nav-link d-flex justify-content-center text-white" href="/logout">Logout<i
+                class="fi fi-ss-sign-out-alt mt-1 ml-4"></i></a>
+
+            {{else}}
+            <a class="nav-link d-flex justify-content-center text-white text-white" href="/login">Login<i
+                class="fi fi-rs-sign-in-alt mt-1 ml-3"></i></a>
+            {{/if}}
+            </button></li>
+
+          </ul>
+        </div>
+      <ul class="navbar-nav  mb-2 mb-lg-0">
+        <div class="pr-5">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/orders">
+              <i class="fi fi-rr-apps-sort">..</i>Orders</a>
+          </li>
+        </div>
+
+        <div class="pr-5">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/view-cart"><i class="fi fi-rs-shopping-cart "></i><span
+                class="badge badge " id="cartCount">{{cartCount}}</span></a>
+          </li>
+        </div>
+
+      </ul>
+
+    </div>
+    </div>
+  </nav>
+
+  <nav id="navset" class="navbar navbar-expand-lg "
+   >
+    <div class="container-fluid">
+      <a class="navbar-brand fs-3 text-white" href="/">Fashion Store</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="/"> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href=""></a>
+          </li>
+
+
+        </ul>
+        <div class="dropdown mr-5 ">
+          <div class="text-white  dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{#if user}}
+            {{ user.Name}}
+
+            {{else}}
+            Account
+
+            {{/if}}
+          </div>
+          <ul class="dropdown-menu bg-dark">
+            <i class=""></i>
+
+            {{#if user}}
+            <a class="nav-link d-flex justify-content-center  text-white" href="/user-profile"><i
+                class="fi fi-rs-user mt-1 mr-1"></i>View Profile</a>
+            <a class="nav-link d-flex justify-content-center  text-white" href="/Wishlist"><i
+                class="fi fi-rr-heart mt-1 mr-2"></i>Wishlist</i><span class="badge badge-dark fs-6 ml-2 text-white "
+                id="">{{wishlistCount}}</span></a></a>
+            <a class="nav-link d-flex justify-content-center text-white" href="/logout">Logout<i
+                class="fi fi-ss-sign-out-alt mt-1 ml-4"></i></a>
+
+            {{else}}
+            <a class="nav-link d-flex justify-content-center text-white text-white" href="/login">Login<i
+                class="fi fi-rs-sign-in-alt mt-1 ml-3"></i></a>
+            {{/if}}
+            </button></li>
+
+          </ul>
+        </div>
+
+        <ul class="navbar-nav  mb-2 mb-lg-0">
+          <div class="pr-5">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/orders">
+                <i class="fi fi-rr-apps-sort">..</i>Orders</a>
+            </li>
+          </div>
+
+          <div class="pr-5">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/view-cart"><i class="fi fi-rs-shopping-cart "></i><span
+                  class="badge badge " id="cartCount">{{cartCount}}</span></a>
+            </li>
+          </div>
+
+        </ul>
+
+
+      </div>
+    </div>
+  </nav>
+</header>

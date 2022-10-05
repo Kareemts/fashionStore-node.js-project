@@ -1,0 +1,29 @@
+<section>
+  <div class="container" style="margin-top: -45px">
+    <div class="row" style="width: 200px;   margin-left: 75%;  ">
+      <a href="/admin/add-subCategory" class="btn btn-secondary">Add subcategory</a>
+    </div>
+    <h3>ALL SUBCATEGORIES</h3>
+    <table class="table mt-4" id="dataTabile">
+      <thead style="background-color: rgba(145, 140, 140, 0.27);">
+        <tr>
+          <th scope="col">NO</th>
+          <th scope="col">SUBCATEGORIES</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each subCategories}}
+        <tr style="background-color: #FFF9F9;">
+          <td>{{inc @index}}</td>
+          <td>{{this.subCategoryName}}</td>
+          <td><a href="/admin/delete-subCategory/{{this._id}}" class=""
+              onclick="return confirm('Are you Want to Delete {{this.NAME}} ?')"><i class="fi fi-rr-trash text-danger"></i></a></td>
+
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>

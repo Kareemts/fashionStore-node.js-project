@@ -1,0 +1,231 @@
+<section>
+
+    <div class="container pt-5">
+
+
+        <div class="row">
+            <div class=" d-flex justify-content-center">
+                <a style="text-decoration: none;" class="font-weight-bold" href="/add-newDeliveryAddress">Add new
+                    delivery address</a>
+            </div>
+            {{#if address.getAddressCount}}
+            <div class="row col-md-8">
+                <div class="container ">
+                    <form id="chekout-form">
+                        {{#each address}}
+                        <div class="card col-md-12 ml-1 mt-3  shadow-sm   bg-white rounded ">
+                            <h5 class="text-dark mt-2">Saved Address</h5>
+                            <div class="">
+                                <p class="card-text " id="FirstName{{this._id}}">{{this.FirstName}}
+                                    {{this.LastName}},
+                                    Mobile No: {{this.Number}}
+                                </p>
+                                <p class="card-text" id="Email{{this._id}}">{{this.Email}}</p>
+                                <p class="card-text" id="Address{{this._id}}">
+                                    {{this.Address}},{{this.City}},{{this.Pincode}}
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <input type="radio" class="mb-4 mr-3" id="vehicle1" name="address"
+                                    value="{{this.addressId}}" checked >
+                                <label for="vehicle1"> Use this</label>
+
+                            </div>
+                        </div>
+                        {{/each}}
+                </div>
+            </div>
+            {{else}}
+            <div class="row col-md-8">
+                <div class="container ">
+                    <form id="chekout-form">
+
+                        <div class="card col-md-12 ml-1 mt-3  shadow-sm   bg-white rounded ">
+                            <h5 class="text-dark mt-2">No default address availabile please add new one</h5>
+
+
+                        </div>
+                </div>
+
+            </div>
+        </div>
+        {{/if}}
+
+
+
+
+        <div class="col-md-4 mb-4 ">
+            <div class="card mb-4 ">
+                <div class="card-header py-3">
+                    <h5 class="mb-0">Summary</h5>
+                </div>
+                <div class="card-body">
+                    <h4 class="d-flex justify-content-center text-dark font-weight-bold">Total Amount
+                        :₹{{sumOfCartProducts}}.00</h4>
+                    <hr>
+                    <div class="payment">
+                        <p class="d-flex justify-content-center text-dark font-weight-bold">Payment Method</p>
+                        <hr>
+                        <label class="radio-inline text-dark font-weight-bold" for=""><input type="radio"
+                                name="payment-method" value="COD" checked>COD</label>
+                        <hr>
+                        <label class="radio-inline mt-2 text-dark font-weight-bold"> <input type="radio"
+                                name="payment-method" value="Razorpay" checked>Razorpay</label>
+                        <hr>
+                        <label class="radio-inline mt-2 text-dark font-weight-bold"> <input type="radio"
+                                name="payment-method" value="Paypal" checked>Paypal</label>
+                        <hr>
+                        <label class="radio-inline mt-2 text-dark font-weight-bold"> <input type="radio"
+                                name="payment-method" value="Wallet" checked>Wallet</label>
+
+                        <p class="text-dark d-flex justify-content-center ">Wallet balance :₹{{wallet}}
+                        </p>
+                        <hr>
+
+                    </div>
+
+                    <button onclick="checkout()" type="submit" class="btn btn-primary btn-lg btn-block mt-3">
+                       CONTINUE
+                    </button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+    </div>
+</section>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var AddressError = document.getElementById('addressErr');
+
+    function validateAddress() {
+
+        var Address = document.getElementById('Address').value;
+
+        if (Address.length < 3) {
+            addressErr.innerHTML = "Enter Propper Address";
+            return false;
+        }
+        addressErr.innerHTML = ""
+        return true
+    }
+
+    function validatePincode() {
+
+        var Pincode = document.getElementById('Pincode').value;
+
+        if (Pincode.length < 3) {
+            pincodeErr.innerHTML = "Enter Propper Pincode";
+            return false;
+        }
+        pincodeErr.innerHTML = ""
+        return true
+    }
+
+    function validatenumber() {
+
+        var Number = document.getElementById('Number').value;
+
+        if (Number.length < 10) {
+            NumberErr.innerHTML = "Enter Propper Mobile Number";
+            return false;
+        }
+        NumberErr.innerHTML = ""
+        return true
+    }
+
+    function checkout() {
+
+        if (!validateAddress() || !validatePincode() || !validatenumber()) {
+            submitError.innerHTML = 'Please fill the form properly';
+            return false;
+        }
+    }
+
+    $("#chekout-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/place-order',
+            method: 'post',
+            data: $('#chekout-form').serialize(),
+            success: (response) => {
+                if (response.COD) {
+                    location.href = '/order-success'
+                }
+                if (response.RAZORPAY) {
+                    razorpayPayment(response)
+                }
+                if (response.PAYPAL) {
+                    paypalPayment(response)
+                }
+                if (response.insufficientFund) {
+                    swal("Sorry!", "InsufficientFund please use anather payment options", "warning");
+                }
+                if (response.wallet) {
+                    location.href = '/order-success'
+                }
+            }
+        })
+    })
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_WapRHiIHoxnvny",
+            "amount": order.amount,
+            "currency": "INR",
+            "name": "StyleWorld",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id,
+            "handler": function (response) {
+                varifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        }
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function varifyPayment(payment, order) {
+        $.ajax({
+            url: '/verfy-payment',
+
+            data: {
+                payment: payment,
+                order: order
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    location.href = '/order-success'
+                } else {
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+
+    function paypalPayment(response) {
+        console.log(response)
+        for (let i = 0; i < response.links.length; i++) {
+            if (response.links[i].rel === 'approval_url') {
+                console.log(response.links[i].href)
+                location.href = response.links[i].href
+            }
+        }
+    }
+</script>

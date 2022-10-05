@@ -1,0 +1,99 @@
+<section>
+    <div class="container-fluid md-5">
+        <div class="d-flex justify-content-end">
+
+            <a href="/admin/add-categoryOffer" class="btn btn-secondary"> Add new offer</a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <h3>Category offer</h3>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table mt-4" id="dataTabile">
+                <thead style="background-color: rgba(145, 140, 140, 0.27);">
+                    <tr>
+                        <th scope="col">NO</th>
+                        <th scope="col">CATEGORY NAME</th>
+                        <th scope="col">DISCOUNT %</th>
+                        {{!-- <th scope="col">EXPAIRY DATE</th> --}}
+                        <th scope="col">Change %</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each categories}}
+                    <tr style="background-color: #FFF9F9;">
+                        <td>{{inc @index}}</td>
+                        <td id="id{{this._id}}">{{this.categoryName}}</td>
+                        <td>{{this.discount}}</td>
+                        {{!-- <td>{{this.expairyDate}}</td> --}}
+                        <td><a href="/admin/change-CategoryOfferpercentage/{{this._id}}"><button class="btn btn-primary">Change % </button></a></td>
+                        {{#if this.status}}
+                        <td><button id="{{this._id}}" class="btn btn-danger"
+                                onclick="DeactivateCategoryOffer('{{this._id}}')">Deactivate</button>
+                        </td>
+                        {{else}}
+                        <td><button id="{{this._id}}" class="btn btn-dark"
+                                onclick="ActivateCategoryOffer('{{this._id}}')">Activate</button>
+                        </td>
+                        {{/if}}
+
+                    </tr>
+                    {{/each}}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    function ActivateCategoryOffer(id) {
+        categoryName = document.getElementById('id' + id).innerText
+        console.log(categoryName)
+        $.ajax({
+            url: '/admin/categoryOffer-Activate/' + id,
+            method: 'post',
+            data: {
+                categoryName: categoryName
+            },
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    location.reload()
+                    swal('Good job!', 'Category offer activated', 'success');
+
+                    document.getElementById(id).innerText = 'Deactivate'
+                }
+            }
+
+        })
+    }
+    function DeactivateCategoryOffer(id) {
+        categoryName = document.getElementById('id' + id).innerText
+        console.log(categoryName)
+        $.ajax({
+            url: '/admin/categoryOffer-Deactivate/' + id,
+            method: 'post',
+            data: {
+                categoryName: categoryName
+            },
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    location.reload()
+                    swal('Good job!', 'Category offer deactivated', 'success');
+
+                    document.getElementById(id).innerText = 'Activate'
+                }
+            }
+
+        })
+    }
+
+
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+
+</script>

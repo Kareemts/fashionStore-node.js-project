@@ -1,0 +1,60 @@
+<section>
+<div class="row">
+    <div class="col-md-5 m-auto">
+        <div class="container mt-5 pl-5">
+
+            <div class="text-center font-weight-bold fs-3 ">Login</div>
+
+
+            <form action="/login" method="post">
+                {{#if loginErr}}
+                <p class="error" style="color: red;">Invalid Email or Password</p>
+                {{/if}}
+                {{#if loginErr2}}
+                <p class="error" style="color: red;">Your Account is blocked</p>
+                {{/if}}
+                <div class="form-group">
+
+                    <label class="fs-6" for="">Email Address</label>
+                    <input type="email" name="Email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="fs-6" for="">Password</label>
+                    <input type="password" name="Password" class="form-control" required>
+
+                </div>
+                {{!-- <div class="form-group">
+                    <label class="fs-6 mt-3" for="">Mobile Number</label>
+                    <input type="text" name="number" class="form-control">
+
+                </div> --}}
+
+
+
+                <button type="submit" class="btn btn-dark   mt-3">
+                    Login
+
+                </button>
+                <br>
+
+
+                <div class="mt-5 d-flex justify-content-end"><a href="/signup">create New Account ?</a>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-Primary mt-5 " href="/mobile">Login with Mobile
+                        number</a>
+                </div>
+
+
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</div>
+</section>

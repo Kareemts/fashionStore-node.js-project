@@ -1,0 +1,112 @@
+<section>
+    {{#if wishlistCount}}
+    <div class="d-flex">
+        <div class="container-fluid py-5 h-100 w-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="" style="border-radius: 10px;">
+                        <div class="d-flex justify-content-center px-4 py-5">
+                            <h5 class="text-muted mb-0">Your Wishlist </h5>
+                        </div>
+                        {{#each Wishlist}}
+                        <div class="card-body p-1">
+                            <div class="d-flex justify-content-between align-items-center ">
+                                {{!-- <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+                                <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p> --}}
+                            </div>
+                            <div class="card shadow-0 border mb-1">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <a href="/view-product/{{this.productItem._id}}"><img
+                                                    style="cursor: pointer;"
+                                                    src="/product-images/{{this.productItem.Images.[0]}}"
+                                                    class="img-fluid" alt="Product img"></a>
+                                        </div>
+                                        <div
+                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class=" mb-0 text-dark">{{this.productItem.NAME}}</p>
+                                        </div>
+                                        <div
+                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class=" mb-0 small text-dark">MRP:₹{{this.productItem.MRP}}</p>
+                                        </div>
+                                        <div
+                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class=" mb-0 small text-danger font-weight-bold">
+                                                {{this.productItem.discount}}%off</p>
+                                        </div>
+                                        <div
+                                            class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                            <p class=" mb-0 small text-dark">Price:₹{{this.productItem.OfferPrice}}</p>
+                                        </div>
+                                        <div class="col-md-2  d-flex justify-content-end" style="cursor: pointer;"
+                                            onclick="deleteItemToWishlist('{{this._id}}','{{this.productItem._id}}')">
+                                            <i class="fi fi-rs-trash"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="d-flex">
+                <div class="container-fluid py-5 h-100 w-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-lg-10 col-xl-8">
+                            <div class="" style="border-radius: 10px;">
+                                <div class="d-flex justify-content-center px-4 py-5">
+                                    <h5 class="text-muted mb-0 fs-1 font-weight-bold">Wishlist Empty</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+
+</section>
+
+<script>
+    function deleteItemToWishlist(cartId, proId) {
+        console.log(cartId, proId)
+        swal({
+            title: 'Are you sure?',
+            text: 'Once deleted, you will not be able to recover this item!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal('Poof! Your item has been deleted!', {
+                    icon: 'success',
+                    buttons: false,
+                });
+                setTimeout(cartItemRemove, 1000);
+                function cartItemRemove() {
+                    if (true) {
+                        $.ajax({
+                            url: '/remove-item-from-wishlist',
+                            data: {
+                                cart: cartId,
+                                product: proId,
+                            },
+                            method: 'post',
+                            success: (response) => {
+                                if (response.removeProduct) {
+                                    location.reload();
+                                }
+                            },
+                        });
+                    } else {
+                    }
+                }
+            } else {
+                swal('Your item not removed');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,87 @@
+<section>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Biling details</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/add-new-address" method="post">
+                            <!-- 2 column grid layout with text inputs for the first and last names -->
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <span id="addressErr" class="text-danger my-auto"></span>
+                                    <div class="form-outline">
+                                        <input type="text" name="FirstName" id="form7Example1" class="form-control"
+                                            required />
+                                        <label class="form-label" for="form7Example1">First name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <span id="addressErr" class="text-danger my-auto"></span>
+                                    <div class="form-outline">
+                                        <input type="text" name="LastName" id="form7Example2" class="form-control"
+                                            required />
+                                        <label class="form-label" for="form7Example2">Last name</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Text input -->
+                            <div class="form-outline mb-4">
+                                <span id="addressErr" class="text-danger my-auto"></span>
+                                <input type="text" name="Address" id="form7Example3" class="form-control" required />
+                                <label class="form-label" for="form7Example3">Address</label>
+                            </div>
+
+                            <!-- Text input -->
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <span id="addressErr" class="text-danger my-auto"></span>
+                                    <div class="form-outline">
+                                        <input type="text" name="City" id="form7Example1" class="form-control"
+                                            required />
+                                        <label class="form-label" for="form7Example1">City</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <span id="addressErr" class="text-danger my-auto"></span>
+                                    <div class="form-outline">
+                                        <input type="text" name="Pincode" id="form7Example2" class="form-control"
+                                            required />
+                                        <label class="form-label" for="form7Example2">Pincode</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email input -->
+                            <span id="addressErr" class="text-danger my-auto"></span>
+                            <div class="form-outline mb-4">
+                                <input type="email" name="Email" id="form7Example5" class="form-control" required />
+                                <label class="form-label" for="form7Example5">Email</label>
+                            </div>
+
+                            <!-- Number input -->
+                            <span id="addressErr" class="text-danger my-auto"></span>
+                            <div class="form-outline mb-4">
+                                <input type="number" name="Number" id="form7Example6" class="form-control" required />
+                                <label class="form-label" for="form7Example6">Phone</label>
+                            </div>
+
+
+
+                            <input type="text" name="userId" value="{{user._id}}" class="form-control" hidden>
+
+                            <!-- Checkbox -->
+
+                            <button type="submit" class="btn btn-dark   mt-3">
+                                Change
+
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+</section>

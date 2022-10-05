@@ -1,0 +1,61 @@
+
+
+    <div class="container-fluid md-5 mt-5">
+        <div class="d-flex justify-content-center mb-4">
+            <h6 class="text-dark font-weight-bold">Wallet History</h6>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table mt-4" id="dataTabile">
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th scope="col">No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Order Id</th>
+                        <th scope="col">Discription</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Debit</th>
+                        <th scope="col">Credit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each wallethistory.[0].history}}
+                    <tr >
+                        <td>{{inc @index}}</td>
+                        <td>{{this.date}}</td>
+                        <td>{{this.ordeId}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.amount}}</td>
+                        {{#if debit}}
+                        <td>Debit</td>
+                        {{else}}
+                        <td></td>
+                        {{/if}}
+
+                        {{#if credit}}
+                        <td>Credit</td>
+                        {{else}}
+                        <td></td>
+                        {{/if}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#dataTabile').DataTable({
+            stateSave: true,
+            "bDestroy": true,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    download: 'open'
+                }
+            ]
+        });
+    });
+</script>

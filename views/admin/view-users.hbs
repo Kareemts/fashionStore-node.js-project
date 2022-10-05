@@ -1,0 +1,45 @@
+<section>
+  <div class="container">
+    <div class="row" style="width: 200px;  margin-left: 75%;  ">
+
+    </div>
+    <H3>USERS</H3>
+    <table class="table" id="dataTabile">
+      <thead>
+        <tr>
+          <th scope="col">NO</th>
+          <th scope="col">NAME</th>
+          <th scope="col">MOBILE NUMBER</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#each userDet}}
+
+
+        <tr >
+          <td>{{inc @index}}</td>
+          <td>{{this.Name}}</td>
+          <td>{{this.MobileNumber}}</td>
+          <td>{{this.Email}}</td>
+
+          {{#if status}}
+
+          <td><a href="/admin/block/{{this._id}}"><i class="fi fi-ss-cross-circle text-danger"></i></td>
+
+
+          {{else}}
+
+          <td><a href="/admin/unblock/{{this._id}}"><i class="fi fi-br-check text-success"></i></a></td>
+
+          {{/if}}
+
+        </tr>
+          {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>

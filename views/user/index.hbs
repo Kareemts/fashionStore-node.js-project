@@ -1,0 +1,151 @@
+<div class='container-fluid  p-3' style="background-color:rgba(50, 49, 49, 0.207) ;">
+
+  {{#each banner}}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="container">
+        <div>
+          <h6 class="fs-1 d-flex justify-content-center font-weight-bold text-dark mt-5">{{this.NAME}}</h6>
+          <h1 class="d-flex justify-content-center font-weight-bold text-dark fs-3 font-italic" style="">EVERYTHING THAT'S</h1>
+          <h1 class="d-flex justify-content-center font-weight-bold text-dark fs-3 font-italic">NEW & NOW</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mt-3">
+      <img class="rounded-3 img-fluid shadow-sm   rounded" src="/banner-Images/{{this.Images.[0]}}" alt="">
+
+    </div>
+
+  </div>
+
+  {{/each}}
+</div>
+<br>
+
+<div class="container">
+<div class="text-center fs-3 font-weight-bold">CATEGORIES</div>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-4  d-flex justify-content-around p-3">
+    {{#each categories}}
+    <a href="/showCategory/{{this.categoryName}}" style="text-decoration: none;">
+      <h1 class="fs-5 btn border border-dark text-dark font-weight-bold ml-1 shadow-sm   rounded shopnow " style="width: 130px;">{{this.categoryName}}</h1>
+    </a>
+    {{/each}}
+  </div> 
+</div>
+</div>  
+
+
+
+<section>
+  <div class="text-center fs-4 text-dark font-weight-bold">ALL PRODUCTS</div>
+  <div class="container-fluid mt-5 d-flex justify-content-center align-items-center">
+    <div class="">
+      <div class="row">
+        {{#each products}}
+        <div class="col-md-3  mb-3  d-flex justify-content-center">
+          <div class="card proCard d-flex justify-content-center">
+            <div class="image-container">
+              <div class="first">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="discountt">{{this.discount}}% Off</span>
+                  {{#if ../loginUser}}
+                  <div class="d-flex justify-content-end mb-3">
+                    <div>
+                      {{#if this.status}}
+                      <i class="fi fi-ss-heart fs-6   d-flex justify-content-end" id="{{this._id}}"
+                        onclick="wishlist('{{this._id}}')" style="cursor: pointer; color: red;"></i>
+                      {{else}}
+                      <i class="fi fi-ss-heart fs-6  d-flex justify-content-end" id="{{this._id}}"
+                        onclick="wishlist('{{this._id}}')" style="cursor: pointer;"></i>
+                      {{/if}}
+                    </div>
+                    <div>
+                      <i class="fi fi-rr-shopping-cart-add fs-6 ml-3   d-flex justify-content-end" id="{{this._id}}"
+                        onclick="addToCart('{{this._id}}')" style="cursor: pointer;"></i>
+                    </div>
+                  </div>
+                  {{else}}
+                  <div class="d-flex justify-content-end mb-3">
+                    <div>   
+                     <a href="/login " style="text-decoration: none;"><i class="fi fi-ss-heart fs-6  d-flex justify-content-end text-Secondary" id="{{this._id}}"
+                        ></i></a> 
+                    </div>
+                    <div>
+                     <a href="/login" style="text-decoration: none;"> <i class="fi fi-rr-shopping-cart-add fs-6 ml-3 text-Secondary   d-flex justify-content-end" id="{{this._id}}"
+                         ></i></a>
+                    </div>
+                  </div>
+                  {{/if}}
+                </div>
+              </div>
+
+              <a href="/view-product/{{this._id}}"><img src="/product-images/{{this.Images.[0]}}"
+                  class=" rounded thumbnail-image " /></a>
+            </div>
+
+            <div class="product-detail-container p-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="dress-name">{{this.NAME}}</h5>
+
+                <div class="d-flex flex-column mb-2">
+                  <span class="new-price">₹{{this.OfferPrice}}</span>
+                  <small class="old-price text-right">MRP: {{this.MRP}}</small>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{!-- category cards --}}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+  function wishlist(id, proId) {
+
+
+    $.ajax({
+      url: '/add-to-wishlist/' + id,
+      method: 'post',
+      data: {
+        cart: proId,
+        product: id,
+      },
+      success: (response) => {
+        if (response.itemAdded) {
+          const wishlist = document.getElementById(id);
+          wishlist.style.color = "red";
+          swal('Item add to wishlist!', 'Item added', 'success');
+        }
+        if (response.itemRemove) {
+          const wishlist = document.getElementById(id);
+          wishlist.style.color = "#777";
+          swal('Item remove from wishlist!', 'Item exist!', 'warning');
+        }
+
+      }
+    })
+
+  }
+
+  function categoryProducts(categoryName) {
+    let category = document.getElementById(categoryName).innerHTML
+    alert(categoryName)
+    $.ajax({
+      url: '/showCategory',
+      method: 'post',
+      data: {
+        categoryName: category,
+      },
+    })
+
+  }
+</script>
